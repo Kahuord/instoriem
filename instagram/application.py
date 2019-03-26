@@ -27,4 +27,19 @@ def create_application(configuration_class=InstagramConfig):
         view_func=views.UserLoginView.as_view('login'),
     )
 
+    application.add_url_rule(
+        rule='/<user_id>/',
+        view_func=views.ProfilePhotos.as_view('profile-photos'),
+    )
+
+    application.add_url_rule(
+        rule='/upload/',
+        view_func=views.UploadPhoto.as_view('upload-photo'),
+    )
+
+    application.add_url_rule(
+        rule='/file/<file_name>/',
+        view_func=views.ViewFile.as_view('view-file'),
+    )
+
     return application

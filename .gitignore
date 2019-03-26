@@ -1,3 +1,5 @@
 *.db
 venv
 .idea
+__pycache__
+uploads
