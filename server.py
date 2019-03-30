@@ -1,5 +1,5 @@
 from instagram import application
 
-print('Starting application')
+print('Yo')
 
 application.run()
