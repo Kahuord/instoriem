@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <img src="{{ photo.url() }}" alt="">
+
+    <form action="{{ photo.like_url() }}" method="post">
+        <input type="submit" value="{{ photo.likes|length or 0 }}">
+    </form>
+
+    <ul>
+        {% for comment in photo.comments %}
+            <li>{{ comment.user.email }}: {{ comment.content }}</li>
+        {% endfor %}
+    </ul>
+
+    <form action="{{ photo.comment_url() }}" method="post">
+        <input type="text" name="content">
+        <input type="submit">
+    </form>
+</body>
+</html>
