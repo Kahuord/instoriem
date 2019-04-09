@@ -33,6 +33,11 @@ def create_application(configuration_class=InstagramConfig):
     )
 
     application.add_url_rule(
+        rule='/photo/<photo_id>/',
+        view_func=views.DetailPhoto.as_view('photo-detail'),
+    )
+
+    application.add_url_rule(
         rule='/upload/',
         view_func=views.UploadPhoto.as_view('upload-photo'),
     )

@@ -88,6 +88,16 @@ class ProfilePhotos(MethodView):
         return flask.render_template('profile_photos.html', photos=user.photos)
 
 
+class DetailPhoto(MethodView):
+    def get(self, photo_id):
+        photo = models.Photo.query.get(photo_id)
+
+        return flask.render_template(
+            template_name_or_list='photo.html',
+            photo=photo,
+        )
+
+
 class UploadPhoto(MethodView):
     decorators = [
         login_required,
