@@ -6,7 +6,7 @@
 </head>
 <body>
     {% for photo in photos %}
-        <img src="{{ photo.url() }}" alt="">
+        <a href="{{ photo.detail_url() }}"><img src="{{ photo.url() }}" alt=""></a>
 
         <form action="{{ photo.like_url() }}" method="post">
             <input type="submit" value="{{ photo.likes|length or 0 }}">
