@@ -42,4 +42,9 @@ def create_application(configuration_class=InstagramConfig):
         view_func=views.ViewFile.as_view('view-file'),
     )
 
+    application.add_url_rule(
+        rule='/add_like/<photo_id>/',
+        view_func=views.AddLike.as_view('add-like'),
+    )
+
     return application

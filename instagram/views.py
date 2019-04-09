@@ -119,3 +119,31 @@ class ViewFile(MethodView):
         uploads_directory = str(flask.current_app.config['UPLOADS_DIRECTORY'])
 
         return flask.send_from_directory(uploads_directory, file_name)
+
+
+class AddLike(MethodView):
+    def post(self, photo_id):
+        already_liked = models.Like.query.filter(
+            models.Like.user_id == current_user.id,
+            models.Like.photo_id == photo_id,
+        ).count()
+
+        if already_liked:
+            return 'Sorry, we can not accept your like more than 1'
+
+        like = models.Like(
+            user_id=current_user.id,
+            photo_id=photo_id,
+        )
+
+        db.session.add(like)
+        db.session.commit()
+
+        photo = models.Photo.query.get(photo_id)
+
+        redirect_url = flask.url_for(
+            endpoint='profile-photos',
+            user_id=photo.user_id,
+        )
+
+        return flask.redirect(redirect_url)

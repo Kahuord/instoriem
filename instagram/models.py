@@ -10,6 +10,7 @@ class User(db.Model):
     password = db.Column(db.String, nullable=False)
 
     photos = db.relationship('Photo', backref='user', lazy=True)
+    likes = db.relationship('Like', backref='user', lazy=True)
 
     @property
     def is_authenticated(self):
@@ -33,7 +34,21 @@ class Photo(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     path = db.Column(db.String, unique=True, nullable=False)
 
+    likes = db.relationship('Like', backref='photo', lazy=True)
+
     def url(self):
         link = flask.url_for('view-file', file_name=self.path)
 
         return link
+
+    def like_url(self):
+        link = flask.url_for('add-like', photo_id=self.id)
+
+        return link
+
+
+class Like(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    photo_id = db.Column(db.Integer, db.ForeignKey('photo.id'), nullable=False)

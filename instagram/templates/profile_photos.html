@@ -7,6 +7,10 @@
 <body>
     {% for photo in photos %}
         <img src="{{ photo.url() }}" alt="">
+
+        <form action="{{ photo.like_url() }}" method="post">
+            <input type="submit" value="{{ photo.likes|length or 0 }}">
+        </form>
     {% endfor %}
 </body>
 </html>
