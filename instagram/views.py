@@ -157,3 +157,22 @@ class AddLike(MethodView):
         )
 
         return flask.redirect(redirect_url)
+
+
+class AddComment(MethodView):
+    def post(self, photo_id):
+        comment = models.Comment(
+            user_id=current_user.id,
+            photo_id=photo_id,
+            content=flask.request.form['content'],
+        )
+
+        db.session.add(comment)
+        db.session.commit()
+
+        redirect_url = flask.url_for(
+            endpoint='photo-detail',
+            photo_id=photo_id,
+        )
+
+        return flask.redirect(redirect_url)

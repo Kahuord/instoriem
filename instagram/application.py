@@ -52,4 +52,9 @@ def create_application(configuration_class=InstagramConfig):
         view_func=views.AddLike.as_view('add-like'),
     )
 
+    application.add_url_rule(
+        rule='/add_comment/<photo_id>/',
+        view_func=views.AddComment.as_view('add-comment'),
+    )
+
     return application
