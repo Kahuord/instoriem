@@ -3,13 +3,12 @@ import flask
 from instagram import views
 from instagram.db import db
 from instagram.auth import login_manager
-from instagram.configuration import InstagramConfig
 
 
-def create_application(configuration_class=InstagramConfig):
+def create_application(configuration):
     application = flask.Flask(__name__)
 
-    application.config.from_object(configuration_class)
+    application.config.from_object(configuration)
 
     db.init_app(application)
 
