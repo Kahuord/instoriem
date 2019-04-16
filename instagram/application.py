@@ -31,7 +31,7 @@ def create_application(configuration):
     )
 
     application.add_url_rule(
-        rule='/<user_id>/',
+        rule='/user/<user_id>/',
         view_func=views.ProfilePhotos.as_view('profile-photos'),
     )
 
