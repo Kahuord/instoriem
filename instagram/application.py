@@ -12,7 +12,11 @@ def create_application(configuration):
 
     db.init_app(application)
 
-    db.create_all(app=application)
+    try:
+        db.create_all(app=application)
+
+    except:
+        pass
 
     login_manager.init_app(application)
 
