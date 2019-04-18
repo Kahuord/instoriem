@@ -1,5 +1,5 @@
 from instagram import application
 
-print('Yo')
+print('Subloc1 run the site')
 
 application.run()
